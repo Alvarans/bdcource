@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=filmcritic'
+      - 'POSTGRES_PASSWORD=pgpas8denian58'
+      - 'POSTGRES_USER=denian'
+    restart: always
+    ports:
+      - 5432:5400
