@@ -10,7 +10,7 @@ public class AdditionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "material_id")
-    private int additionMaterialId;
+    private long additionMaterialId;
     @Column(name = "material_url", nullable = false)
     private String materialUrl;
     private short additionTypeId;
