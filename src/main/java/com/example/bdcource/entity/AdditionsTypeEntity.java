@@ -17,6 +17,6 @@ public class AdditionsTypeEntity {
     @Column(name = "type", unique = true, nullable = false)
     private String additionsTypeName;
     //Additions
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "additions")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "addition")
     private Set<AdditionEntity> additions = new HashSet<>();
 }

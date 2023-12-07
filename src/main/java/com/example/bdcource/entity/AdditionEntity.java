@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "additions")
+@Table(name = "addition")
 public class AdditionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

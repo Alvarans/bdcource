@@ -7,4 +7,4 @@ services:
       - 'POSTGRES_USER=denian'
     restart: always
     ports:
-      - 5432:5400
+      - 5432:5432

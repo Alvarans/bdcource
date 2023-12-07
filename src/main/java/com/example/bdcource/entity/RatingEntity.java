@@ -16,12 +16,12 @@ public class RatingEntity {
     @Column(name = "rating_value", nullable = false)
     private short ratingValue;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "rated_film")
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
     private FilmEntity ratedFilm;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "rated_user")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity ratedUser;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "rated_review")
+    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
     private ReviewEntity ratedReview;
 }

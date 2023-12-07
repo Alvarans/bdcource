@@ -23,12 +23,12 @@ public class CommentEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "report")
     Set<ReportEntity> reports = new HashSet<>();
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "commented_film", nullable = false)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
     private FilmEntity commentedFilm;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity user;
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "commented_review")
+    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
     private ReviewEntity commentedReview;
 }

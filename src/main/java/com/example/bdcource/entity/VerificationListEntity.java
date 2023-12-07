@@ -19,6 +19,6 @@ public class VerificationListEntity {
     private UserEntity user;
     //Document Type
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "document_type")
+    @JoinColumn(name = "document_type_id", referencedColumnName = "document_type_id")
     private DocumentTypeEntity documentType;
 }

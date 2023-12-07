@@ -19,14 +19,11 @@ public class ReportEntity {
     private Timestamp reportTime;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-    @Column(name = "report_type", nullable = false)
     private ReportTypesEntity reportType;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id", referencedColumnName = "comment_id")
-    @Column(name = "reported_comment")
     private CommentEntity reportedComment;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", referencedColumnName = "review_id")
-    @Column(name = "reported_review", nullable = false)
     private ReviewEntity reportedReview;
 }
