@@ -3,6 +3,9 @@ package com.example.bdcource.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "user")
@@ -21,7 +24,18 @@ public class UserEntity {
     private String gender;
     @Column(name = "user_socials")
     private String userSocials;
-    @Column(name = "user_rating", nullable = false)
-    private short userRating;
-    private short userRoleId;
+    //Reviews
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "review")
+    @Column(name = "user_reviews")
+    private Set<ReviewEntity> userReviews = new HashSet<>();
+    //Comments
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+    @Column(name = "user_comments")
+    private Set<CommentEntity> userComments = new HashSet<>();
+    //Rates
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "rating")
+    @Column(name = "user_rates")
+    private Set<RatingEntity> userRates = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RolesEntity userRole;
 }

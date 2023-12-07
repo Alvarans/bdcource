@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @Data
@@ -17,8 +16,17 @@ public class ReportEntity {
     @Column(name = "report_text", nullable = false)
     private int reportText;
     @Column(name = "report_time")
-    private Timestamp report_time;
-    private int typeId;
-    private int commentId;
-    private int reviewId;
+    private Timestamp reportTime;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    @Column(name = "report_type", nullable = false)
+    private ReportTypesEntity reportType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id", referencedColumnName = "comment_id")
+    @Column(name = "reported_comment")
+    private CommentEntity reportedComment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
+    @Column(name = "reported_review", nullable = false)
+    private ReviewEntity reportedReview;
 }

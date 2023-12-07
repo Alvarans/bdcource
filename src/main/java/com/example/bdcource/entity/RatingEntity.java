@@ -15,8 +15,13 @@ public class RatingEntity {
     private String ratingType;
     @Column(name = "rating_value", nullable = false)
     private short ratingValue;
-
-    private long filmId;
-    private long userId;
-    private long reviewId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "rated_film")
+    private FilmEntity ratedFilm;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "rated_user")
+    private UserEntity ratedUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "rated_review")
+    private ReviewEntity ratedReview;
 }

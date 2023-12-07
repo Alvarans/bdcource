@@ -13,6 +13,10 @@ public class AdditionEntity {
     private long additionMaterialId;
     @Column(name = "material_url", nullable = false)
     private String materialUrl;
-    private short additionTypeId;
-    private int reviewId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    private AdditionsTypeEntity additionType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
+    private ReviewEntity review;
 }

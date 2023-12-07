@@ -3,6 +3,9 @@ package com.example.bdcource.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "film")
@@ -25,5 +28,29 @@ public class FilmEntity {
     private short reviewerRating;
     @Column(name = "users_rating")
     private short usersRating;
+    //Reviews
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "review")
+    private Set<ReviewEntity> reviews = new HashSet<>();
+    //Comments
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+    private Set<CommentEntity> comments = new HashSet<>();
+    //Rating
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "rating")
+    private Set<RatingEntity> rates = new HashSet<>();
+    //Film genres
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "filmgenre",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<FilmGenreEntity> genres = new HashSet<>();
 
+    public void AddGenre(FilmGenreEntity filmGenre) {
+        this.genres.add(filmGenre);
+        filmGenre.getFilms().add(this);
+    }
+
+    public void removeGenre(FilmGenreEntity filmGenre) {
+        this.genres.remove(filmGenre);
+        filmGenre.getFilms().remove(this);
+    }
 }

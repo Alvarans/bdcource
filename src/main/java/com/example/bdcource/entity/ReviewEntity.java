@@ -3,6 +3,9 @@ package com.example.bdcource.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "review")
@@ -21,6 +24,26 @@ public class ReviewEntity {
     private short filmRate;
     @Column(name = "review_rate")
     private short reviewRate;
-    private long filmId;
-    private long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
+    private FilmEntity film;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private UserEntity user;
+    //Additions
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "additions")
+    @Column(name = "review_additions")
+    private Set<AdditionEntity> reviewAddition = new HashSet<>();
+    //Reports
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "report")
+    @Column(name = "review_reports")
+    private Set<ReportEntity> reviewReports = new HashSet<>();
+    //Comments
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+    @Column(name = "review_comments")
+    private Set<CommentEntity> reviewComments = new HashSet<>();
+    //Rating
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+    @Column(name = "review_rates")
+    private Set<RatingEntity> reviewRates = new HashSet<>();
 }

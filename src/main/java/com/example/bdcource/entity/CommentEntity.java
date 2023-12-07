@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "comment")
@@ -16,7 +19,16 @@ public class CommentEntity {
     private String commentText;
     @Column(name = "comment_time", nullable = false)
     private Timestamp commentTime;
-    private long filmId;
-    private long userId;
-    private long reviewId;
+    //Reports
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "report")
+    Set<ReportEntity> reports = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "commented_film", nullable = false)
+    private FilmEntity commentedFilm;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = false)
+    private UserEntity user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "commented_review")
+    private ReviewEntity commentedReview;
 }

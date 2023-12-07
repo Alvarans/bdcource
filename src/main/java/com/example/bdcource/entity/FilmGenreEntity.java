@@ -3,6 +3,9 @@ package com.example.bdcource.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "filmgenres")
@@ -13,4 +16,6 @@ public class FilmGenreEntity {
     private short genreId;
     @Column(name = "genre_name", nullable = false, unique = true)
     private String genreName;
+    @ManyToMany(mappedBy = "film")
+    private Set<FilmEntity> films = new HashSet<>();
 }
