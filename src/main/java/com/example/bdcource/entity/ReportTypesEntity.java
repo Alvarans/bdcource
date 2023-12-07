@@ -13,11 +13,11 @@ public class ReportTypesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_id")
-    private short typeId;
+    private int typeId;
     @Column(name = "type", unique = true)
     private String reportType;
     @Column(name = "action")
     private String reportAction;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "report")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "reportType")
     private Set<ReportEntity> reports = new HashSet<>();
 }

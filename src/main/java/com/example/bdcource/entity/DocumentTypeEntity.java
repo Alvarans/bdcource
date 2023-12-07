@@ -13,11 +13,11 @@ public class DocumentTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "document_type_id")
-    private short documentTypeId;
+    private int documentTypeId;
     @Column(name = "document_name", unique = true, nullable = false)
     private String documentName;
     //Verification
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "verification")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "documentType")
     @Column(name = "verification_list")
     Set<VerificationListEntity> verificationList = new HashSet<>();
 }

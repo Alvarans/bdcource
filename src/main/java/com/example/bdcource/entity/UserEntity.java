@@ -25,17 +25,18 @@ public class UserEntity {
     @Column(name = "user_socials")
     private String userSocials;
     //Reviews
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "review")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     @Column(name = "user_reviews")
     private Set<ReviewEntity> userReviews = new HashSet<>();
     //Comments
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     @Column(name = "user_comments")
     private Set<CommentEntity> userComments = new HashSet<>();
     //Rates
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "rating")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ratedUser")
     @Column(name = "user_rates")
     private Set<RatingEntity> userRates = new HashSet<>();
+    //Role
     @ManyToOne(fetch = FetchType.LAZY)
     private RolesEntity userRole;
 }

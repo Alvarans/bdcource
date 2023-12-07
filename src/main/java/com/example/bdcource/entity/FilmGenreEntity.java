@@ -13,9 +13,9 @@ public class FilmGenreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "genre_id")
-    private short genreId;
+    private int genreId;
     @Column(name = "genre_name", nullable = false, unique = true)
     private String genreName;
-    @ManyToMany(mappedBy = "film")
+    @ManyToMany(mappedBy = "genres")
     private Set<FilmEntity> films = new HashSet<>();
 }

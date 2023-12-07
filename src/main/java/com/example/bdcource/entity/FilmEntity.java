@@ -29,13 +29,13 @@ public class FilmEntity {
     @Column(name = "users_rating")
     private short usersRating;
     //Reviews
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "review")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "film")
     private Set<ReviewEntity> reviews = new HashSet<>();
     //Comments
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "commentedFilm")
     private Set<CommentEntity> comments = new HashSet<>();
     //Rating
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "rating")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ratedFilm")
     private Set<RatingEntity> rates = new HashSet<>();
     //Film genres
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
