@@ -13,7 +13,7 @@ public class RolesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "roles_id")
-    private int rolesId;
+    private int roleId;
     @Column(name = "role", unique = true, nullable = false)
     private String role;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userRole")

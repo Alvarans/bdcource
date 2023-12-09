@@ -19,7 +19,7 @@ public class FilmEntity {
     @Column(name = "release_date", nullable = false)
     private short releaseDate;
     @Column(name = "director", nullable = false)
-    private String Director;
+    private String director;
     @Column(name = "film_timing", nullable = false)
     private short filmTiming;
     @Column(name = "annotation", nullable = false)
