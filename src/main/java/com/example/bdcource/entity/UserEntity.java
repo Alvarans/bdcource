@@ -39,4 +39,8 @@ public class UserEntity {
     //Role
     @ManyToOne(fetch = FetchType.LAZY)
     private RolesEntity userRole;
+    //Reports
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "reportedUser")
+    @Column(name = "user_reports")
+    private Set<ReportEntity> userReports = new HashSet<>();
 }

@@ -21,6 +21,9 @@ public class ReportEntity {
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
     private ReportTypesEntity reportType;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity reportedUser;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id", referencedColumnName = "comment_id")
     private CommentEntity reportedComment;
     @ManyToOne(fetch = FetchType.LAZY)

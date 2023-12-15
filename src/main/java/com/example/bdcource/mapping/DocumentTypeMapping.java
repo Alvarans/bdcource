@@ -14,4 +14,11 @@ public class DocumentTypeMapping {
         tempEntity.setDocumentName(dto.getDocumentName());
         return tempEntity;
     }
+
+    public DocumentTypeDto mapToDocumentTypeDto(DocumentTypeEntity entity){
+        DocumentTypeDto tempDto = new DocumentTypeDto();
+        tempDto.setDocumentTypeId(entity.getDocumentTypeId());
+        tempDto.setDocumentName(entity.getDocumentName());
+        return tempDto;
+    }
 }
