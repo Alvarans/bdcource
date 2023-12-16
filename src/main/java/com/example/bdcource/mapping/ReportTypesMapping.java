@@ -3,10 +3,9 @@ package com.example.bdcource.mapping;
 import com.example.bdcource.dto.ReportTypesDto;
 import com.example.bdcource.entity.ReportTypesEntity;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Service;
 
-@Mapper(componentModel = "spring")
-public interface ReportTypesMapping {
-    ReportTypesDto toDto(ReportTypesEntity entity);
+@Service
+public class ReportTypesMapping {
 
-    ReportTypesEntity toEntity(ReportTypesDto dto);
 }

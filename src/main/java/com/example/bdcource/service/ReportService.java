@@ -7,6 +7,8 @@ import com.example.bdcource.mapping.ReportTypesMapping;
 import com.example.bdcource.repository.ReportRepository;
 import com.example.bdcource.repository.ReportTypesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,14 +19,19 @@ public class ReportService {
     private final ReportTypesRepository reportTypesRepository;
     private final ReportTypesMapping reportTypesMapping;
 
-    public void addReport(ReportDto reportDto){
+    public Page<ReportEntity> takeAllReports(PageRequest pageRequest) {
+        return reportRepository.findAll(pageRequest);
+    }
+//TODO Send to UserService
+    public void addReport(ReportDto reportDto) {
         reportRepository.save(reportMapping.mapToReportEntity(reportDto));
     }
-    public ReportEntity takeReport(int reportId){
-        return reportRepository.getByReportId(reportId);
+
+    public ReportDto takeReport(int reportId) {
+        return reportMapping.mapToReportDto(reportRepository.getByReportId(reportId));
     }
 
-    public void rejectReport(int reportId){
+    public void rejectReport(int reportId) {
         reportRepository.deleteById(reportId);
     }
 }

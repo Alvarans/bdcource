@@ -3,10 +3,9 @@ package com.example.bdcource.mapping;
 import com.example.bdcource.dto.FilmDto;
 import com.example.bdcource.entity.FilmEntity;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Service;
 
-@Mapper(componentModel = "spring")
-public interface FilmMapping {
-    FilmEntity toEntity(FilmDto dto);
+@Service
+public class FilmMapping {
 
-    FilmDto toDto(FilmEntity entity);
 }

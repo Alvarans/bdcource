@@ -24,6 +24,10 @@ public class UserEntity {
     private String gender;
     @Column(name = "user_socials")
     private String userSocials;
+    @Column(name = "user_rating")
+    private short userRating = 50;
+    @Column(name = "user_reviewer_rating")
+    private short reviewerRating = 0;
     //Reviews
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     @Column(name = "user_reviews")
