@@ -11,10 +11,10 @@ import java.sql.Timestamp;
 @Data
 public class ReportDto {
     int reportId;
-    int reportText;
+    String reportText;
     Timestamp reportTime;
-    ReportTypesEntity reportType;
-    UserEntity reportedUser;
-    CommentEntity reportedComment;
-    ReviewEntity reportedReview;
+    int reportType;
+    long reportedUser;
+    Long reportedComment;
+    Long reportedReview;
 }

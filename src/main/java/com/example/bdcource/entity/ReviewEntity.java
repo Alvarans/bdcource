@@ -11,9 +11,9 @@ import java.util.Set;
 @Table(name = "review")
 public class ReviewEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
-    private long reviewId;
+    private Long reviewId;
     @Column(name = "review_title", unique = true, nullable = false)
     private String reviewTitle;
     @Column(name = "author_organization")

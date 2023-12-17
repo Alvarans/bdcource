@@ -10,11 +10,11 @@ import java.sql.Timestamp;
 @Table(name = "report")
 public class ReportEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "report_id")
-    private int reportId;
+    private Integer reportId;
     @Column(name = "report_text", nullable = false)
-    private int reportText;
+    private String reportText;
     @Column(name = "report_time")
     private Timestamp reportTime;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -8,7 +8,7 @@ import lombok.Data;
 @Table(name = "verification")
 public class VerificationListEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "verification_id")
     private int verificationId;
     @Column(name = "verification_text", nullable = false)

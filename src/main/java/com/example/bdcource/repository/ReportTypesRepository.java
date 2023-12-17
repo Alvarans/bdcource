@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReportTypesRepository extends JpaRepository<ReportTypesEntity, Short> {
+    ReportTypesEntity findByTypeId(int id);
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "roles")
 public class RolesEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roles_id")
     private int roleId;
     @Column(name = "role", unique = true, nullable = false)

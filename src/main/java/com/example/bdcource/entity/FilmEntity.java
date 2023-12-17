@@ -11,9 +11,9 @@ import java.util.Set;
 @Table(name = "film")
 public class FilmEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
-    private long filmId;
+    private Long filmId;
     @Column(name = "film_title", nullable = false)
     private String filmTitle;
     @Column(name = "release_date", nullable = false)

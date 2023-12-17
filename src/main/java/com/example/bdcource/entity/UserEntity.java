@@ -8,12 +8,12 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private long userId;
+    private Long userId;
     @Column(name = "user_nickname", unique = true, nullable = false)
     private String userNickname;
     @Column(name = "user_email", unique = true, nullable = false)
@@ -42,6 +42,7 @@ public class UserEntity {
     private Set<RatingEntity> userRates = new HashSet<>();
     //Role
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roles_id", referencedColumnName = "roles_id")
     private RolesEntity userRole;
     //Reports
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "reportedUser")

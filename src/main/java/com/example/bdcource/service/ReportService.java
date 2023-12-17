@@ -28,7 +28,7 @@ public class ReportService {
     }
 
     public ReportDto takeReport(int reportId) {
-        return reportMapping.mapToReportDto(reportRepository.getByReportId(reportId));
+        return reportMapping.mapToReportDto(reportRepository.findByReportId(reportId));
     }
 
     public void rejectReport(int reportId) {

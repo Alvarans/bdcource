@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReportRepository extends JpaRepository<ReportEntity, Integer> {
-    ReportEntity getByReportId(Integer reportId);
+    ReportEntity findByReportId(Integer reportId);
 }

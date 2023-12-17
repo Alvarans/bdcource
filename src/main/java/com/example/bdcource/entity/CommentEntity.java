@@ -12,9 +12,9 @@ import java.util.Set;
 @Table(name = "comment")
 public class CommentEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
-    private long commentId;
+    private Long commentId;
     @Column(name = "comment_text", nullable = false)
     private String commentText;
     @Column(name = "comment_time", nullable = false)

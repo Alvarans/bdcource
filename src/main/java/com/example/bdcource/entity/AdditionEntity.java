@@ -8,9 +8,9 @@ import lombok.Data;
 @Table(name = "addition")
 public class AdditionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "material_id")
-    private long additionMaterialId;
+    private Long additionMaterialId;
     @Column(name = "material_url", nullable = false)
     private String materialUrl;
     @ManyToOne(fetch = FetchType.LAZY)
