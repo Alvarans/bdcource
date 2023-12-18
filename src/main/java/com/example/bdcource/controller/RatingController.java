@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/bdcourse/report")
+@RequestMapping("/api/bdcourse/rating")
 public class RatingController {
     @Autowired
     private RatingService ratingService;

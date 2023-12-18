@@ -12,6 +12,7 @@ public class UserMapping {
         tempEntity.setUserNickname(dto.getUserNickname());
         tempEntity.setUserRating(dto.getUserRating());
         tempEntity.setUserEmail(dto.getUserEmail());
+        tempEntity.setReviewerRating(dto.getReviewerRating());
         return tempEntity;
     }
 
@@ -21,6 +22,7 @@ public class UserMapping {
         tempDto.setUserNickname(entity.getUserNickname());
         tempDto.setUserRating(entity.getUserRating());
         tempDto.setUserEmail(entity.getUserEmail());
+        tempDto.setReviewerRating(entity.getReviewerRating());
         return tempDto;
     }
 }

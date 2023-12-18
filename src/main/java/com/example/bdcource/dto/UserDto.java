@@ -8,4 +8,5 @@ public class UserDto {
     String userNickname;
     String userEmail;
     short userRating;
+    short reviewerRating;
 }
