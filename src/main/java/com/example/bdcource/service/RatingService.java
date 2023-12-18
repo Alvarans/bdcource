@@ -32,31 +32,38 @@ public class RatingService {
         ratingRepository.save(ratingMapping.mapToRatingEntity(newRateDto));
     }
 
-    public int calculateFilmRate(long filmId){
+    public int calculateFilmRate(long filmId) {
         FilmEntity film = filmRepository.findByFilmId(filmId);
         List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedFilm(film);
-        if(ratings.isEmpty())
+        if (ratings.isEmpty())
             return 0;
-        int ratingsCounter = 0;
         int rateSum = 0;
-        for(RatingEntity rate: ratings){
-            rateSum+=rate.getRatingValue();
-            ratingsCounter++;
+        for (RatingEntity rate : ratings) {
+            rateSum += rate.getRatingValue();
         }
-        return rateSum/ratingsCounter;
+        return rateSum / ratings.size();
     }
 
-    public int calculateReviewRate(long reviewId){
+    public int calculateReviewRate(long reviewId) {
         ReviewEntity review = reviewRepository.findByReviewId(reviewId);
-        List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedReview(review);
-        if(ratings.isEmpty())
+        try {
+            List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedReview(review);
+            if (ratings.isEmpty())
+                return 0;
+            int rateSum = 0;
+            for (RatingEntity rate : ratings) {
+                rateSum += rate.getRatingValue();
+            }
+            return rateSum / ratings.size();
+        } catch (Throwable throwable){
             return 0;
-        int rateCounter = 0;
-        int rateSum = 0;
-        for(RatingEntity rate: ratings){
-            rateSum+=rate.getRatingValue();
-            rateCounter++;
         }
-        return rateSum/rateCounter;
+//        if (ratings.isEmpty())
+//            return 0;
+//        int rateSum = 0;
+//        for (RatingEntity rate : ratings) {
+//            rateSum += rate.getRatingValue();
+//        }
+//        return rateSum / ratings.size();
     }
 }

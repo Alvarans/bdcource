@@ -2,11 +2,14 @@ package com.example.bdcource.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "report")
 public class ReportEntity {
     @Id
