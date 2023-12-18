@@ -34,7 +34,7 @@ public class ReportController {
     @DeleteMapping("/rejectreport/{id}")
     public ResponseEntity<Integer> rejectReport(@PathVariable("id") Integer id) {
         reportService.rejectReport(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 //TODO Send to user service
     @PostMapping("/sendreport")

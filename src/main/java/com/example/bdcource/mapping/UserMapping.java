@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserMapping {
-    UserEntity mapToUserEntity(UserDto dto){
+    public UserEntity mapToUserEntity(UserDto dto){
         UserEntity tempEntity = new UserEntity();
         tempEntity.setUserId(dto.getUserId());
         tempEntity.setUserNickname(dto.getUserNickname());
@@ -15,7 +15,7 @@ public class UserMapping {
         return tempEntity;
     }
 
-    UserDto mapToUserDto(UserEntity entity){
+    public UserDto mapToUserDto(UserEntity entity){
         UserDto tempDto = new UserDto();
         tempDto.setUserId(entity.getUserId());
         tempDto.setUserNickname(entity.getUserNickname());
