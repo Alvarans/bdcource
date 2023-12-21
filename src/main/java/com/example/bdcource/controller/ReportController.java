@@ -1,7 +1,6 @@
 package com.example.bdcource.controller;
 
 import com.example.bdcource.dto.ReportDto;
-import com.example.bdcource.entity.ReportEntity;
 import com.example.bdcource.mapping.ReportMapping;
 import com.example.bdcource.service.ReportService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class ReportController {
 
     @GetMapping("/takereportpages")
     public List<ReportDto> takeAllReportsByPages(@RequestParam(required = false, defaultValue = "0") int page,
-                                                    @RequestParam(required = false, defaultValue = "10") int size) {
+                                                 @RequestParam(required = false, defaultValue = "10") int size) {
         return reportService.takeAllReports(PageRequest.of(page, size)).getContent()
                 .stream().map(reportMapping::mapToReportDto)
                 .collect(Collectors.toList());
@@ -36,14 +35,15 @@ public class ReportController {
         reportService.rejectReport(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-//TODO Send to user service
+
+    //TODO Send to user service
     @PostMapping("/sendreport")
-    public void addReport(@RequestBody ReportDto reportDto){
+    public void addReport(@RequestBody ReportDto reportDto) {
         reportService.addReport(reportDto);
     }
 
     @GetMapping("/takereport/{id}")
-    public ReportDto takeReport(@PathVariable("id") Integer id){
+    public ReportDto takeReport(@PathVariable("id") Integer id) {
         return reportService.takeReport(id);
     }
 }

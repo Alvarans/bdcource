@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocumentTypeRepository extends JpaRepository<DocumentTypeEntity, Short> {
+    DocumentTypeEntity findByDocumentTypeId(int id);
 }

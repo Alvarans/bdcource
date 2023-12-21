@@ -1,7 +1,6 @@
 package com.example.bdcource.controller;
 
 import com.example.bdcource.dto.RatingDto;
-import com.example.bdcource.dto.ReportDto;
 import com.example.bdcource.mapping.RatingMapping;
 import com.example.bdcource.service.RatingService;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +19,18 @@ public class RatingController {
     private RatingMapping ratingMapping;
 
     @PostMapping("/addrating")
-    public ResponseEntity<Integer> addRating(@RequestBody RatingDto ratingDto){
+    public ResponseEntity<Integer> addRating(@RequestBody RatingDto ratingDto) {
         ratingService.addRate(ratingDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @GetMapping("/filmrate")
-    public int takeFilmRate(@RequestParam("id")Long id){
+    public int takeFilmRate(@RequestParam("id") Long id) {
         return ratingService.calculateFilmRate(id);
     }
 
     @GetMapping("/reviewrate")
-    public int takeReviewRate(@RequestParam("id")Long id){
+    public int takeReviewRate(@RequestParam("id") Long id) {
         return ratingService.calculateReviewRate(id);
     }
 }

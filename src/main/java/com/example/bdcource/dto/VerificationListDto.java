@@ -8,6 +8,6 @@ import lombok.Data;
 public class VerificationListDto {
     int verificationId;
     String verificationText;
-    UserEntity user;
-    DocumentTypeEntity documentType;
+    Long user;
+    Integer documentType;
 }

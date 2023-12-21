@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VerificationListRepository extends JpaRepository<VerificationListEntity, Integer> {
+    VerificationListEntity findByVerificationId(int id);
 }
