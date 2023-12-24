@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class FilmDto {
+    Long filmId;
     String filmTitle;
     short releaseDate;
     String director;

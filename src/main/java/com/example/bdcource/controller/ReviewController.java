@@ -43,6 +43,8 @@ public class ReviewController {
         String uri = "http://localhost:8080/api/bdcourse/user/takeuserbyid?id=" + userId;
         RestTemplate restTemplate = new RestTemplate();
         UserDto userDto = restTemplate.getForObject(uri, UserDto.class);
+        if (userDto == null)
+            return 0;
         List<ReviewEntity> reviews = reviewService.takeAllReviewsForUser(userMapping.mapToUserEntity(userDto));
         String url;
         int rating = 0;

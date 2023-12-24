@@ -19,7 +19,7 @@ public class CommentMapping {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    CommentEntity mapToCommentEntity(CommentDto dto) {
+    public CommentEntity mapToCommentEntity(CommentDto dto) {
         CommentEntity tempEntity = new CommentEntity();
         tempEntity.setCommentId(dto.getCommentId());
         tempEntity.setCommentText(dto.getCommentText());
@@ -30,7 +30,7 @@ public class CommentMapping {
         return tempEntity;
     }
 
-    CommentDto mapToCommentDto(CommentEntity entity) {
+    public CommentDto mapToCommentDto(CommentEntity entity) {
         CommentDto tempDto = new CommentDto();
         tempDto.setCommentId(entity.getCommentId());
         tempDto.setCommentText(entity.getCommentText());
