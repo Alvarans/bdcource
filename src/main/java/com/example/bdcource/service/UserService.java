@@ -3,6 +3,7 @@ package com.example.bdcource.service;
 import com.example.bdcource.dto.UserDto;
 import com.example.bdcource.entity.UserEntity;
 import com.example.bdcource.mapping.UserMapping;
+import com.example.bdcource.repository.RolesRepository;
 import com.example.bdcource.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private UserMapping userMapping;
+    @Autowired
+    private RolesRepository rolesRepository;
 
     public void addUser(UserDto userDto) {
         userRepository.save(userMapping.mapToUserEntity(userDto));
@@ -48,6 +51,11 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void changeUserRole(long userId, String role){
+        UserEntity user = userRepository.findByUserId(userId);
+        user.setUserRole(rolesRepository.findByRole(role));
+        userRepository.save(user);
+    }
     public short calculateReviewerRating(List<Integer> reviewRatings) {
         short rateSum = 0;
         for (Integer rates : reviewRatings) {

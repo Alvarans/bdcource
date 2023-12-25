@@ -58,12 +58,5 @@ public class RatingService {
         } catch (Throwable throwable){
             return 0;
         }
-//        if (ratings.isEmpty())
-//            return 0;
-//        int rateSum = 0;
-//        for (RatingEntity rate : ratings) {
-//            rateSum += rate.getRatingValue();
-//        }
-//        return rateSum / ratings.size();
     }
 }
