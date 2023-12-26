@@ -10,6 +10,7 @@ import com.example.bdcource.repository.RatingRepository;
 import com.example.bdcource.repository.ReviewRepository;
 import com.example.bdcource.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RatingService {
-    final private RatingMapping ratingMapping;
-    final private RatingRepository ratingRepository;
-    final private FilmRepository filmRepository;
+    @Autowired
+    private RatingMapping ratingMapping;
+    @Autowired
+    private RatingRepository ratingRepository;
     final private ReviewRepository reviewRepository;
 
     public void addRate(RatingDto ratingDto) {
@@ -31,8 +33,7 @@ public class RatingService {
         ratingRepository.save(ratingMapping.mapToRatingEntity(newRateDto));
     }
 
-    public int calculateFilmRate(long filmId) {
-        FilmEntity film = filmRepository.findByFilmId(filmId);
+    public int calculateFilmRate(FilmEntity film) {
         List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedFilm(film);
         if (ratings.isEmpty())
             return 0;
@@ -43,8 +44,7 @@ public class RatingService {
         return rateSum / ratings.size();
     }
 
-    public int calculateReviewRate(long reviewId) {
-        ReviewEntity review = reviewRepository.findByReviewId(reviewId);
+    public int calculateReviewRate(ReviewEntity review) {
         try {
             List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedReview(review);
             if (ratings.isEmpty())
