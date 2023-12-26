@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,7 +53,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void changeUserRole(long userId, String role){
+    public void changeUserRole(long userId, String role) {
         UserEntity user = userRepository.findByUserId(userId);
         user.setUserRole(rolesRepository.findByRole(role));
         userRepository.save(user);
@@ -67,10 +68,32 @@ public class UserService {
     }
 
     @Scheduled(cron = "@yearly")
-    public void upRate(){
+    public void upRate() {
         List<UserEntity> users = userRepository.findAll();
-        for(UserEntity user : users){
-            user.setUserRating((short)(user.getUserRating()+10));
+        for (UserEntity user : users) {
+            user.setUserRating((short) (user.getUserRating() + 10));
         }
+    }
+
+    public List<UserDto> takeTenWorstUsers(){
+        List<UserEntity> users = userRepository.findAllByOrderByUserRating();
+        List<UserDto> worstUsers = new ArrayList<>();
+        for (int i = 0; i < 10; ++i){
+            if (i == users.size())
+                break;
+            worstUsers.add(userMapping.mapToUserDto(users.get(i)));
+        }
+        return worstUsers;
+    }
+
+    public List<UserDto> takeTenWorstReviewers(){
+        List<UserEntity> users = userRepository.findAllByOrderByReviewerRating();
+        List<UserDto> worstReviewers = new ArrayList<>();
+        for (int i = 0; i < 5; ++i){
+            if (i == users.size())
+                break;
+            worstReviewers.add(userMapping.mapToUserDto(users.get(i)));
+        }
+        return worstReviewers;
     }
 }

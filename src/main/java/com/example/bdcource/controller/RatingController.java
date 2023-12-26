@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/bdcourse/rating")
+@RequestMapping("/api/bdcource/rating")
 public class RatingController {
     @Autowired
     private RatingService ratingService;

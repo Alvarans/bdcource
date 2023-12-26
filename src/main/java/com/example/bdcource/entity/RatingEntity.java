@@ -1,7 +1,6 @@
 package com.example.bdcource.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +13,6 @@ public class RatingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rating_id")
     private Long ratingId;
-    //@Column(name = "rating_type", nullable = false)
-    //private String ratingType;
     @Column(name = "rating_value", nullable = false)
     private short ratingValue;
     //User

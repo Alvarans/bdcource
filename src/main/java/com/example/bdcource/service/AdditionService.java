@@ -22,21 +22,21 @@ public class AdditionService {
     @Autowired
     private AdditionsTypeRepository additionsTypeRepository;
 
-    public void addAdditionToReview(AdditionDto additionDto){
+    public void addAdditionToReview(AdditionDto additionDto) {
         additionRepository.save(additionMapping.mapToAdditionEntity(additionDto));
     }
 
-    public List<AdditionDto> takeReviewAdditions(ReviewEntity review){
+    public List<AdditionDto> takeReviewAdditions(ReviewEntity review) {
         return additionRepository.findAdditionEntitiesByReview(review)
                 .stream().map(additionMapping::mapToAdditionDto)
                 .collect(Collectors.toList());
     }
 
-    public void removeAdditionById(long additionId){
+    public void removeAdditionById(long additionId) {
         additionRepository.deleteById(additionId);
     }
 
-    public String takeAdditionType(int additionTypeId){
+    public String takeAdditionType(int additionTypeId) {
         return additionsTypeRepository.findByAdditionsTypeId(additionTypeId).getAdditionsTypeName();
     }
 }

@@ -12,10 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class FilmMapping {
-    @Autowired
-    private ReviewRepository reviewRepository;
-    @Autowired
-    private UserRepository userRepository;
     public FilmDto mapToFilmDto(FilmEntity entity){
         FilmDto tempDto = new FilmDto();
         tempDto.setFilmId(entity.getFilmId());
@@ -31,6 +27,7 @@ public class FilmMapping {
 
     public FilmEntity mapToFilmEntity(FilmDto dto){
         FilmEntity tempEntity = new FilmEntity();
+        tempEntity.setFilmId(dto.getFilmId());
         tempEntity.setFilmTitle(dto.getFilmTitle());
         tempEntity.setReleaseDate(dto.getReleaseDate());
         tempEntity.setDirector(dto.getDirector());

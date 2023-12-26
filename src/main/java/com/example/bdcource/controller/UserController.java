@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/bdcourse/user")
+@RequestMapping("/api/bdcource/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -39,6 +41,16 @@ public class UserController {
         return userMapping.mapToUserDto(userService.getUserByEmail(email));
     }
 
+    @GetMapping("/takeworstusers")
+    public List<UserDto> takeWorstUsers(){
+        return userService.takeTenWorstUsers();
+    }
+
+    @GetMapping("/takeworstreviewers")
+    public List<UserDto> takeWorstReviewers(){
+        return userService.takeTenWorstReviewers();
+    }
+
     @PostMapping("/downgradeuser")
     public ResponseEntity<Long> downgradeUser(@RequestParam("id") Long id, @RequestParam("rate") short rate) {
         userService.downgradeUser(id, rate);
@@ -46,7 +58,7 @@ public class UserController {
     }
 
     @PutMapping("/changeuserrole")
-    public ResponseEntity<Long> changeUserRole(@RequestParam("id")Long userId, @RequestParam("role")String role){
+    public ResponseEntity<Long> changeUserRole(@RequestParam("id") Long userId, @RequestParam("role") String role) {
         userService.changeUserRole(userId, role);
         return new ResponseEntity<>(userId, HttpStatus.ACCEPTED);
     }

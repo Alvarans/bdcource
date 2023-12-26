@@ -1,7 +1,6 @@
 package com.example.bdcource.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,11 +42,12 @@ public class FilmEntity {
     //Film genres
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
-                    CascadeType.ALL
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
             })
     @JoinTable(name = "filmgenre",
-            joinColumns = { @JoinColumn(name = "film_id") },
-            inverseJoinColumns = {@JoinColumn(name = "genre_id") })
+            joinColumns = {@JoinColumn(name = "film_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")})
     private Set<FilmGenreEntity> genres = new HashSet<>();
 
     public void AddGenre(FilmGenreEntity filmGenre) {

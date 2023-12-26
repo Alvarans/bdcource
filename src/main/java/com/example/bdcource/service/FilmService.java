@@ -1,7 +1,6 @@
 package com.example.bdcource.service;
 
 import com.example.bdcource.dto.FilmDto;
-import com.example.bdcource.entity.FilmEntity;
 import com.example.bdcource.mapping.FilmMapping;
 import com.example.bdcource.repository.FilmRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,20 +18,21 @@ public class FilmService {
     @Autowired
     private FilmMapping filmMapping;
 
-    public void addFilm(FilmDto filmDto){
+    public void addFilm(FilmDto filmDto) {
         filmRepository.save(filmMapping.mapToFilmEntity(filmDto));
     }
 
-    public FilmDto takeFilmById(long filmId){
+    public FilmDto takeFilmById(long filmId) {
         return filmMapping.mapToFilmDto(filmRepository.findByFilmId(filmId));
     }
 
-    public List<FilmDto> takeFilmsByTitle(String name){
+    public List<FilmDto> takeFilmsByTitle(String name) {
         return filmRepository.findFilmEntitiesByFilmTitle(name)
                 .stream().map(filmMapping::mapToFilmDto)
                 .collect(Collectors.toList());
     }
-    public void removeFilmById(long filmId){
+
+    public void removeFilmById(long filmId) {
         filmRepository.deleteById(filmId);
     }
 }

@@ -20,6 +20,12 @@ public class VerificationListController {
     @Autowired
     private VerificationListMapping verificationListMapping;
 
+    @PostMapping("/addverification")
+    public ResponseEntity<Integer> addVerification(@RequestBody VerificationListDto verificationListDto) {
+        verificationListService.addVerification(verificationListDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @GetMapping("/takeverification")
     public VerificationListDto takeVerificationById(@RequestParam("id") Integer id) {
         return verificationListService.takeVerification(id);

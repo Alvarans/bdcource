@@ -18,6 +18,7 @@ public class ReviewMapping {
 
     public ReviewEntity mapToReviewEntity(ReviewDto dto){
         ReviewEntity tempEntity = new ReviewEntity();
+        tempEntity.setReviewId(dto.getReviewId());
         tempEntity.setReviewTitle(dto.getReviewTitle());
         tempEntity.setAuthorOrganization(dto.getAuthorOrganization());
         tempEntity.setReviewText(dto.getReviewText());

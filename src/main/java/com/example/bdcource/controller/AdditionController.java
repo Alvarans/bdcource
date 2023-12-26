@@ -33,7 +33,7 @@ public class AdditionController {
 
     @GetMapping("/takereviewadditions")
     public List<AdditionDto> takeReviewAdditions(@RequestParam("id") Long reviewId) {
-        String uri = "http://localhost:8080/api/bdcourse/review/takereview?id=" + reviewId;
+        String uri = "http://localhost:8080/api/bdcource/review/takereview?id=" + reviewId;
         RestTemplate restTemplate = new RestTemplate();
         ReviewDto reviewDto = restTemplate.getForObject(uri, ReviewDto.class);
         return reviewDto != null
@@ -42,12 +42,12 @@ public class AdditionController {
     }
 
     @GetMapping("/takeadditiontype")
-    public String takeAdditionType(@RequestParam("id")int additionTypeId){
+    public String takeAdditionType(@RequestParam("id") int additionTypeId) {
         return additionService.takeAdditionType(additionTypeId);
     }
 
     @DeleteMapping("/removeaddition")
-    public ResponseEntity<Integer> removeAddition(@RequestParam("id")int additionId){
+    public ResponseEntity<Integer> removeAddition(@RequestParam("id") int additionId) {
         additionService.removeAdditionById(additionId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

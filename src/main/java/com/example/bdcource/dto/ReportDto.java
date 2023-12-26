@@ -1,9 +1,5 @@
 package com.example.bdcource.dto;
 
-import com.example.bdcource.entity.CommentEntity;
-import com.example.bdcource.entity.ReportTypesEntity;
-import com.example.bdcource.entity.ReviewEntity;
-import com.example.bdcource.entity.UserEntity;
 import lombok.Data;
 
 import java.sql.Timestamp;

@@ -10,7 +10,6 @@ import com.example.bdcource.repository.RatingRepository;
 import com.example.bdcource.repository.ReviewRepository;
 import com.example.bdcource.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,7 +55,7 @@ public class RatingService {
                 rateSum += rate.getRatingValue();
             }
             return rateSum / ratings.size();
-        } catch (Throwable throwable){
+        } catch (Throwable throwable) {
             return 0;
         }
     }

@@ -26,7 +26,10 @@ public class CommentMapping {
         tempEntity.setCommentTime(dto.getCommentTime());
         tempEntity.setCommentedFilm(filmRepository.findByFilmId(dto.getCommentedFilm()));
         tempEntity.setUser(userRepository.findByUserId(dto.getUser()));
-        tempEntity.setCommentedReview(reviewRepository.findByReviewId(dto.getCommentedReview()));
+        if (dto.getCommentedReview() == null)
+            tempEntity.setCommentedReview(null);
+        else
+            tempEntity.setCommentedReview(reviewRepository.findByReviewId(dto.getCommentedReview()));
         return tempEntity;
     }
 
@@ -37,7 +40,10 @@ public class CommentMapping {
         tempDto.setCommentTime(entity.getCommentTime());
         tempDto.setCommentedFilm(entity.getCommentedFilm().getFilmId());
         tempDto.setUser(entity.getUser().getUserId());
-        tempDto.setCommentedReview(entity.getCommentedReview().getReviewId());
+        if (entity.getCommentedReview() == null)
+            tempDto.setCommentedReview(null);
+        else
+            tempDto.setCommentedReview(entity.getCommentedReview().getReviewId());
         return tempDto;
     }
 }

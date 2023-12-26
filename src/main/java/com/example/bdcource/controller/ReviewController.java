@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/bdcourse/review")
+@RequestMapping("/api/bdcource/review")
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
@@ -40,7 +40,7 @@ public class ReviewController {
 
     @GetMapping("/takereviewerrate")
     public short takeReviewerRate(@RequestParam("id") Long userId) {
-        String uri = "http://localhost:8080/api/bdcourse/user/takeuserbyid?id=" + userId;
+        String uri = "http://localhost:8080/api/bdcource/user/takeuserbyid?id=" + userId;
         RestTemplate restTemplate = new RestTemplate();
         UserDto userDto = restTemplate.getForObject(uri, UserDto.class);
         if (userDto == null)
@@ -49,7 +49,7 @@ public class ReviewController {
         String url;
         int rating = 0;
         for (ReviewEntity review : reviews) {
-            url = "http://localhost:8080/api/bdcourse/rating/reviewrate?id=" + review.getReviewId();
+            url = "http://localhost:8080/api/bdcource/rating/reviewrate?id=" + review.getReviewId();
             rating += restTemplate.getForObject(url, Integer.class);
         }
         return (short) (rating / reviews.size());

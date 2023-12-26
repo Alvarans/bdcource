@@ -1,7 +1,6 @@
 package com.example.bdcource.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +15,10 @@ public class AdditionEntity {
     private Long additionMaterialId;
     @Column(name = "material_url", nullable = false)
     private String materialUrl;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
     private AdditionsTypeEntity additionType;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "review_id", referencedColumnName = "review_id")
     private ReviewEntity review;
 }

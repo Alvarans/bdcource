@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/bdcouce")
+@RequestMapping("/api/bdcouce/comment")
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -34,19 +34,19 @@ public class CommentController {
     private FilmMapping filmMapping;
 
     @PostMapping("/addcomment")
-    public ResponseEntity<Long> addComment(@RequestBody CommentDto commentDto){
+    public ResponseEntity<Long> addComment(@RequestBody CommentDto commentDto) {
         commentService.addComment(commentDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/takecomment")
-    public CommentDto takeCommentById(@RequestParam("id")Long commentId){
+    public CommentDto takeCommentById(@RequestParam("id") Long commentId) {
         return commentService.takeCommentById(commentId);
     }
 
     @GetMapping("/takefilmcomments")
-    public List<CommentDto> takeFilmComments(@RequestParam("id")Long filmId){
-        String uri = "http://localhost:8080/api/bdcourse/film/takefilm?id=" + filmId;
+    public List<CommentDto> takeFilmComments(@RequestParam("id") Long filmId) {
+        String uri = "http://localhost:8080/api/bdcource/film/takefilm?id=" + filmId;
         RestTemplate restTemplate = new RestTemplate();
         FilmDto filmDto = restTemplate.getForObject(uri, FilmDto.class);
         return filmDto != null
@@ -55,8 +55,8 @@ public class CommentController {
     }
 
     @GetMapping("/takereviewcomments")
-    public List<CommentDto> takeReviewComments(@RequestParam("id")Long reviewId){
-        String uri = "http://localhost:8080/api/bdcourse/review/takereview?id=" + reviewId;
+    public List<CommentDto> takeReviewComments(@RequestParam("id") Long reviewId) {
+        String uri = "http://localhost:8080/api/bdcource/review/takereview?id=" + reviewId;
         RestTemplate restTemplate = new RestTemplate();
         ReviewDto reviewDto = restTemplate.getForObject(uri, ReviewDto.class);
         return reviewDto != null
@@ -65,8 +65,8 @@ public class CommentController {
     }
 
     @GetMapping("/takeusercomments")
-    public List<CommentDto> takeUserComments(@RequestParam("id")Long userId){
-        String uri = "http://localhost:8080/api/bdcourse/user/takeuserbyid?id=" + userId;
+    public List<CommentDto> takeUserComments(@RequestParam("id") Long userId) {
+        String uri = "http://localhost:8080/api/bdcource/user/takeuserbyid?id=" + userId;
         RestTemplate restTemplate = new RestTemplate();
         UserDto userDto = restTemplate.getForObject(uri, UserDto.class);
         return userDto != null
@@ -75,7 +75,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/removecomment")
-    public ResponseEntity<Long> removeComment(@RequestParam("id")Long commentId){
+    public ResponseEntity<Long> removeComment(@RequestParam("id") Long commentId) {
         commentService.removeComment(commentId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

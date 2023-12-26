@@ -18,6 +18,9 @@ public class VerificationListService {
     @Autowired
     private VerificationListMapping verificationListMapping;
 
+    public void addVerification(VerificationListDto verificationListDto){
+        verificationListRepository.save(verificationListMapping.mapToVerificationListEntity(verificationListDto));
+    }
     public VerificationListDto takeVerification(int verificationId) {
         return verificationListMapping.mapToVerificationListDto(verificationListRepository.findByVerificationId(verificationId));
     }

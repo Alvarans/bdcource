@@ -15,7 +15,6 @@ public class FilmGenreMapping {
         FilmGenreEntity tempEntity = new FilmGenreEntity();
         tempEntity.setGenreId(dto.getGenreId());
         tempEntity.setGenreName(dto.getGenreName());
-        //TODO FilmsfromID
         return tempEntity;
     }
 }

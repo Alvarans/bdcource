@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/bdcourse/report")
+@RequestMapping("/api/bdcource/report")
 public class ReportController {
     //@Autowired
     private final ReportService reportService;
