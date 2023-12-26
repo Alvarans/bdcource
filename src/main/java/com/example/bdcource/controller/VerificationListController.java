@@ -31,6 +31,10 @@ public class VerificationListController {
         return verificationListService.takeVerification(id);
     }
 
+    @GetMapping("/takedocumenttype")
+    public String takeDocumentType(@RequestParam("id")int verificationId){
+        return verificationListService.takeDocumentType(verificationId);
+    }
     @GetMapping("/takeallverification")
     public List<VerificationListDto> takeAllVerifications() {
         return verificationListService.takeAllVerifications();

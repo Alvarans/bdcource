@@ -22,6 +22,11 @@ public class ReportController {
     @Autowired
     private ReportMapping reportMapping;
 
+    @PostMapping("/sendreport")
+    public void addReport(@RequestBody ReportDto reportDto) {
+        reportService.addReport(reportDto);
+    }
+
     @GetMapping("/takereportpages")
     public List<ReportDto> takeAllReportsByPages(@RequestParam(required = false, defaultValue = "0") int page,
                                                  @RequestParam(required = false, defaultValue = "10") int size) {
@@ -30,20 +35,19 @@ public class ReportController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/takereport")
+    public ReportDto takeReport(@RequestParam("id") Integer id) {
+        return reportService.takeReport(id);
+    }
+
+    @GetMapping("/takereporttype")
+    public String takeReportType(int typeId){
+        return reportService.takeReportType(typeId);
+    }
+
     @DeleteMapping("/rejectreport/{id}")
     public ResponseEntity<Integer> rejectReport(@PathVariable("id") Integer id) {
         reportService.rejectReport(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    //TODO Send to user service
-    @PostMapping("/sendreport")
-    public void addReport(@RequestBody ReportDto reportDto) {
-        reportService.addReport(reportDto);
-    }
-
-    @GetMapping("/takereport/{id}")
-    public ReportDto takeReport(@PathVariable("id") Integer id) {
-        return reportService.takeReport(id);
     }
 }

@@ -51,7 +51,12 @@ public class UserController {
         return userService.takeTenWorstReviewers();
     }
 
-    @PostMapping("/downgradeuser")
+    @GetMapping("/takeuserrole")
+    public String takeUserRole(@RequestParam("id")Long userId){
+        return userService.takeUserRole(userId);
+    }
+
+    @PutMapping("/downgradeuser")
     public ResponseEntity<Long> downgradeUser(@RequestParam("id") Long id, @RequestParam("rate") short rate) {
         userService.downgradeUser(id, rate);
         return new ResponseEntity<>(id, HttpStatus.OK);

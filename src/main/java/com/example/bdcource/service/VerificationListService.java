@@ -1,7 +1,9 @@
 package com.example.bdcource.service;
 
 import com.example.bdcource.dto.VerificationListDto;
+import com.example.bdcource.entity.VerificationListEntity;
 import com.example.bdcource.mapping.VerificationListMapping;
+import com.example.bdcource.repository.DocumentTypeRepository;
 import com.example.bdcource.repository.VerificationListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class VerificationListService {
     private VerificationListRepository verificationListRepository;
     @Autowired
     private VerificationListMapping verificationListMapping;
+    @Autowired
+    private DocumentTypeRepository documentTypeRepository;
 
     public void addVerification(VerificationListDto verificationListDto){
         verificationListRepository.save(verificationListMapping.mapToVerificationListEntity(verificationListDto));
@@ -33,5 +37,10 @@ public class VerificationListService {
 
     public void rejectVerification(int verificationId) {
         verificationListRepository.deleteById(verificationId);
+    }
+
+    public String takeDocumentType(int verificationId){
+        VerificationListEntity verificationListEntity = verificationListRepository.findByVerificationId(verificationId);
+        return verificationListEntity.getDocumentType().getDocumentName();
     }
 }

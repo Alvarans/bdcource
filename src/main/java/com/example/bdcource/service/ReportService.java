@@ -35,4 +35,8 @@ public class ReportService {
     public void rejectReport(int reportId) {
         reportRepository.deleteById(reportId);
     }
+
+    public String takeReportType(int typeId){
+        return reportTypesRepository.findByTypeId(typeId).getReportType();
+    }
 }

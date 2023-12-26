@@ -59,6 +59,11 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public String takeUserRole(long userId){
+        UserEntity user = userRepository.findByUserId(userId);
+        return user.getUserRole().getRole();
+    }
+
     public short calculateReviewerRating(List<Integer> reviewRatings) {
         short rateSum = 0;
         for (Integer rates : reviewRatings) {

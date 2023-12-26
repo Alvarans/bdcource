@@ -20,7 +20,6 @@ public class RatingService {
     final private RatingMapping ratingMapping;
     final private RatingRepository ratingRepository;
     final private FilmRepository filmRepository;
-    final private UserRepository userRepository;
     final private ReviewRepository reviewRepository;
 
     public void addRate(RatingDto ratingDto) {

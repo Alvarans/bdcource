@@ -1,6 +1,7 @@
 package com.example.bdcource.controller;
 
 import com.example.bdcource.dto.FilmDto;
+import com.example.bdcource.dto.FilmGenreDto;
 import com.example.bdcource.mapping.FilmMapping;
 import com.example.bdcource.service.FilmService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,16 @@ public class FilmController {
     @GetMapping("/takefilm")
     public FilmDto takeFilmById(@RequestParam("id")Long filmId){
         return filmService.takeFilmById(filmId);
+    }
+
+    @GetMapping("/takefilmgenres")
+    public List<FilmGenreDto> takeFilmGenres(@RequestParam("id")Long filmId){
+        return filmService.takeFilmGenres(filmId);
+    }
+
+    @GetMapping("/takefilmsbygenre")
+    public List<FilmDto> takeFilmsByGenre(@RequestParam("id")int filmGenreId){
+        return filmService.takeFilmsByGenre(filmGenreId);
     }
 
     @GetMapping("/takefilmsbytitle")
