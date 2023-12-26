@@ -7,6 +7,7 @@ import com.example.bdcource.repository.RolesRepository;
 import com.example.bdcource.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,11 +57,20 @@ public class UserService {
         user.setUserRole(rolesRepository.findByRole(role));
         userRepository.save(user);
     }
+
     public short calculateReviewerRating(List<Integer> reviewRatings) {
         short rateSum = 0;
         for (Integer rates : reviewRatings) {
             rateSum += rates;
         }
         return (short) (rateSum / reviewRatings.size());
+    }
+
+    @Scheduled(cron = "@yearly")
+    public void upRate(){
+        List<UserEntity> users = userRepository.findAll();
+        for(UserEntity user : users){
+            user.setUserRating((short)(user.getUserRating()+10));
+        }
     }
 }

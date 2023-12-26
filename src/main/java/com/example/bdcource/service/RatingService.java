@@ -10,6 +10,7 @@ import com.example.bdcource.repository.RatingRepository;
 import com.example.bdcource.repository.ReviewRepository;
 import com.example.bdcource.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

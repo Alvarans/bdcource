@@ -22,7 +22,7 @@ public class ReportService {
     public Page<ReportEntity> takeAllReports(PageRequest pageRequest) {
         return reportRepository.findAll(pageRequest);
     }
-//TODO Send to UserService
+// Send to UserService
     public void addReport(ReportDto reportDto) {
         reportRepository.save(reportMapping.mapToReportEntity(reportDto));
     }

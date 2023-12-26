@@ -1,9 +1,11 @@
 package com.example.bdcource.controller;
 
 import com.example.bdcource.dto.CommentDto;
+import com.example.bdcource.dto.FilmDto;
 import com.example.bdcource.dto.ReviewDto;
 import com.example.bdcource.dto.UserDto;
 import com.example.bdcource.mapping.CommentMapping;
+import com.example.bdcource.mapping.FilmMapping;
 import com.example.bdcource.mapping.ReviewMapping;
 import com.example.bdcource.mapping.UserMapping;
 import com.example.bdcource.service.CommentService;
@@ -28,6 +30,8 @@ public class CommentController {
     private ReviewMapping reviewMapping;
     @Autowired
     private UserMapping userMapping;
+    @Autowired
+    private FilmMapping filmMapping;
 
     @PostMapping("/addcomment")
     public ResponseEntity<Long> addComment(@RequestBody CommentDto commentDto){
@@ -40,19 +44,24 @@ public class CommentController {
         return commentService.takeCommentById(commentId);
     }
 
-//    @GetMapping("/takefilmcomments")
-//    public List<CommentDto> takeFilmComments(@RequestParam("id")Long filmId){
-//        String uri = "http://localhost:8080/api/bdcourse/user/takeuserbyid?id=" + userId;
-//        RestTemplate restTemplate = new RestTemplate();
-//        UserDto userDto = restTemplate.getForObject(uri, UserDto.class);
-//    }
+    @GetMapping("/takefilmcomments")
+    public List<CommentDto> takeFilmComments(@RequestParam("id")Long filmId){
+        String uri = "http://localhost:8080/api/bdcourse/film/takefilm?id=" + filmId;
+        RestTemplate restTemplate = new RestTemplate();
+        FilmDto filmDto = restTemplate.getForObject(uri, FilmDto.class);
+        return filmDto != null
+                ? commentService.takeFilmComments(filmMapping.mapToFilmEntity(filmDto))
+                : null;
+    }
 
     @GetMapping("/takereviewcomments")
     public List<CommentDto> takeReviewComments(@RequestParam("id")Long reviewId){
         String uri = "http://localhost:8080/api/bdcourse/review/takereview?id=" + reviewId;
         RestTemplate restTemplate = new RestTemplate();
         ReviewDto reviewDto = restTemplate.getForObject(uri, ReviewDto.class);
-        return reviewDto != null ? commentService.takeReviewComments(reviewMapping.mapToReviewEntity(reviewDto)) : null;
+        return reviewDto != null
+                ? commentService.takeReviewComments(reviewMapping.mapToReviewEntity(reviewDto))
+                : null;
     }
 
     @GetMapping("/takeusercomments")
@@ -60,7 +69,9 @@ public class CommentController {
         String uri = "http://localhost:8080/api/bdcourse/user/takeuserbyid?id=" + userId;
         RestTemplate restTemplate = new RestTemplate();
         UserDto userDto = restTemplate.getForObject(uri, UserDto.class);
-        return userDto != null ? commentService.takeUserComments(userMapping.mapToUserEntity(userDto)) : null;
+        return userDto != null
+                ? commentService.takeUserComments(userMapping.mapToUserEntity(userDto))
+                : null;
     }
 
     @DeleteMapping("/removecomment")

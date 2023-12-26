@@ -39,10 +39,16 @@ public class UserController {
         return userMapping.mapToUserDto(userService.getUserByEmail(email));
     }
 
-    @PostMapping("/downgradeUser")
+    @PostMapping("/downgradeuser")
     public ResponseEntity<Long> downgradeUser(@RequestParam("id") Long id, @RequestParam("rate") short rate) {
         userService.downgradeUser(id, rate);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PutMapping("/changeuserrole")
+    public ResponseEntity<Long> changeUserRole(@RequestParam("id")Long userId, @RequestParam("role")String role){
+        userService.changeUserRole(userId, role);
+        return new ResponseEntity<>(userId, HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/removeuser")

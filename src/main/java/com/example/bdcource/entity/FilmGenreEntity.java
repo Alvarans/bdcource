@@ -1,5 +1,6 @@
 package com.example.bdcource.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -19,6 +20,12 @@ public class FilmGenreEntity {
     private int genreId;
     @Column(name = "genre_name", nullable = false, unique = true)
     private String genreName;
-    @ManyToMany(mappedBy = "genres")
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "genres")
+    @JsonIgnore
     private Set<FilmEntity> films = new HashSet<>();
 }

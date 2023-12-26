@@ -41,10 +41,13 @@ public class FilmEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ratedFilm")
     private Set<RatingEntity> rates = new HashSet<>();
     //Film genres
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.ALL
+            })
     @JoinTable(name = "filmgenre",
-            joinColumns = @JoinColumn(name = "film_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = {@JoinColumn(name = "genre_id") })
     private Set<FilmGenreEntity> genres = new HashSet<>();
 
     public void AddGenre(FilmGenreEntity filmGenre) {
