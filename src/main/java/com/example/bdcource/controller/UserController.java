@@ -43,12 +43,12 @@ public class UserController {
 
     @GetMapping("/takeworstusers")
     public List<UserDto> takeWorstUsers(){
-        return userService.takeTenWorstUsers();
+        return userService.takeTenWorstUsersByRate();
     }
 
     @GetMapping("/takeworstreviewers")
     public List<UserDto> takeWorstReviewers(){
-        return userService.takeTenWorstReviewers();
+        return userService.takeTenWorstReviewersByRate();
     }
 
     @GetMapping("/takeuserrole")

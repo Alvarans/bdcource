@@ -22,7 +22,6 @@ public class RatingService {
     private RatingMapping ratingMapping;
     @Autowired
     private RatingRepository ratingRepository;
-    final private ReviewRepository reviewRepository;
 
     public void addRate(RatingDto ratingDto) {
         RatingDto newRateDto = new RatingDto();

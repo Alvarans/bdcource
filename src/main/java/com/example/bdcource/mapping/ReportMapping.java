@@ -5,6 +5,7 @@ import com.example.bdcource.entity.ReportEntity;
 import com.example.bdcource.repository.CommentRepository;
 import com.example.bdcource.repository.ReportTypesRepository;
 import com.example.bdcource.repository.ReviewRepository;
+import com.example.bdcource.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class ReportMapping {
     private CommentRepository commentRepository;
     @Autowired
     private ReportTypesRepository reportTypesRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public ReportDto mapToReportDto(ReportEntity entity) {
         ReportDto tempDto = new ReportDto();
@@ -25,6 +28,7 @@ public class ReportMapping {
         tempDto.setReportText(entity.getReportText());
         tempDto.setReportTime(entity.getReportTime());
         tempDto.setReportType(entity.getReportType().getTypeId());
+        tempDto.setReportedUser(entity.getReportedUser().getUserId());
         if (entity.getReportedReview() == null)
             tempDto.setReportedReview(null);
         else
@@ -44,6 +48,7 @@ public class ReportMapping {
         tempEntity.setReportType(reportTypesRepository.findByTypeId(dto.getReportType()));
         tempEntity.setReportedReview(reviewRepository.findByReviewId(dto.getReportedReview()));
         tempEntity.setReportedComment(commentRepository.findByCommentId(dto.getReportedComment()));
+        tempEntity.setReportedUser(userRepository.findByUserId(dto.getReportedUser()));
         return tempEntity;
     }
 

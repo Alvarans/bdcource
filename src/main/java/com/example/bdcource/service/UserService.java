@@ -80,7 +80,7 @@ public class UserService {
         }
     }
 
-    public List<UserDto> takeTenWorstUsers(){
+    public List<UserDto> takeTenWorstUsersByRate(){
         List<UserEntity> users = userRepository.findAllByOrderByUserRating();
         List<UserDto> worstUsers = new ArrayList<>();
         for (int i = 0; i < 10; ++i){
@@ -91,7 +91,7 @@ public class UserService {
         return worstUsers;
     }
 
-    public List<UserDto> takeTenWorstReviewers(){
+    public List<UserDto> takeTenWorstReviewersByRate(){
         List<UserEntity> users = userRepository.findAllByOrderByReviewerRating();
         List<UserDto> worstReviewers = new ArrayList<>();
         for (int i = 0; i < 5; ++i){

@@ -1,6 +1,7 @@
 package com.example.bdcource.controller;
 
 import com.example.bdcource.dto.ReportDto;
+import com.example.bdcource.dto.ReviewDto;
 import com.example.bdcource.mapping.ReportMapping;
 import com.example.bdcource.service.ReportService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,8 +47,18 @@ public class ReportController {
         return reportService.takeReportType(typeId);
     }
 
-    @DeleteMapping("/rejectreport/{id}")
-    public ResponseEntity<Integer> rejectReport(@PathVariable("id") Integer id) {
+    @PostMapping("/acceptreport")
+    public ResponseEntity<Integer> acceptReport(@RequestParam("id") Integer reportId, @RequestParam("rate") Integer rate){
+        ReportDto reportDto = reportService.takeReport(reportId);
+        String uri = "http://localhost:8080/api/bdcource/user/downgradeuser?id=" + reportDto.getReportedUser()+"&rate=" + rate;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getForObject(uri, Long.class);
+        uri = "http://localhost:8080/api/bdcource/report/rejectreport?id=" + reportId;
+        restTemplate.getForObject(uri, Integer.class);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @DeleteMapping("/rejectreport")
+    public ResponseEntity<Integer> rejectReport(@RequestParam("id") Integer id) {
         reportService.rejectReport(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
