@@ -9,6 +9,8 @@ import com.example.bdcource.repository.FilmGenreRepository;
 import com.example.bdcource.repository.FilmRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +34,10 @@ public class FilmService {
 
     public FilmDto takeFilmById(long filmId) {
         return filmMapping.mapToFilmDto(filmRepository.findByFilmId(filmId));
+    }
+
+    public Page<FilmEntity> takeFilms(PageRequest pageRequest){
+        return filmRepository.findAll(pageRequest);
     }
 
     public List<FilmDto> takeFilmsByTitle(String name) {

@@ -6,12 +6,14 @@ import com.example.bdcource.mapping.FilmMapping;
 import com.example.bdcource.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,6 +33,14 @@ public class FilmController {
     @GetMapping("/takefilm")
     public FilmDto takeFilmById(@RequestParam("id")Long filmId){
         return filmService.takeFilmById(filmId);
+    }
+
+    @GetMapping("/takefilms")
+    public List<FilmDto> takeAllFilmsByPages(@RequestParam(required = false, defaultValue = "0") int page,
+                                             @RequestParam(required = false, defaultValue = "10") int size) {
+        return filmService.takeFilms(PageRequest.of(page, size)).getContent()
+                .stream().map(filmMapping::mapToFilmDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/takefilmgenres")

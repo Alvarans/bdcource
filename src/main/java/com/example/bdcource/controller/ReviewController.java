@@ -38,6 +38,9 @@ public class ReviewController {
         return reviewService.takeReviewById(reviewId);
     }
 
+    @GetMapping("/takereviewbyfilm")
+    public List<ReviewDto> takeFilmsReviews(@RequestParam("id") Long filmId) {return reviewService.takeFilmsReviews(filmId);}
+
     @GetMapping("/takereviewerrate")
     public short takeReviewerRate(@RequestParam("id") Long userId) {
         String uri = "http://localhost:8080/api/bdcource/user/takeuserbyid?id=" + userId;

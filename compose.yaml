@@ -1,6 +1,7 @@
 services:
   postgres:
     image: 'postgres:latest'
+    container_name: 'bdcource-postgres-1'
     environment:
       - 'POSTGRES_DB=filmcritic'
       - 'POSTGRES_PASSWORD=pgpas8denian58'

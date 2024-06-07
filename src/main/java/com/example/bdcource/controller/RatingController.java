@@ -4,6 +4,7 @@ import com.example.bdcource.dto.FilmDto;
 import com.example.bdcource.dto.RatingDto;
 import com.example.bdcource.dto.ReviewDto;
 import com.example.bdcource.dto.UserDto;
+import com.example.bdcource.entity.ReviewEntity;
 import com.example.bdcource.mapping.FilmMapping;
 import com.example.bdcource.mapping.RatingMapping;
 import com.example.bdcource.mapping.ReviewMapping;
@@ -14,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,6 +45,15 @@ public class RatingController {
         return filmDto != null
                 ? ratingService.calculateFilmRate(filmMapping.mapToFilmEntity(filmDto))
                 : 0;
+    }
+
+    @GetMapping("/filmreviewerrate")
+    public int takeReviewerFilmRate(@RequestParam("id") Long filmId) {
+        String uri = "http://localhost:8080/api/bdcource/review/takereviewbyfilm?id=" + filmId;
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<ReviewDto[]> response = restTemplate.getForEntity(uri,ReviewDto[].class);
+        List<ReviewDto> reviewDtos = List.of(response.getBody());
+        return ratingService.calculateReviewersFilmRate(reviewDtos);
     }
 
     @GetMapping("/reviewrate")

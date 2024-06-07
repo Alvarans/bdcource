@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,11 @@ public class ReviewService {
         return reviewMapping.mapToReviewDto(reviewRepository.findByReviewId(reviewId));
     }
 
+    public List<ReviewDto> takeFilmsReviews(long filmId) {
+        return reviewRepository.findReviewEntitiesByFilmFilmId(filmId)
+                .stream().map(reviewMapping::mapToReviewDto)
+                .collect(Collectors.toList());
+    }
     public Page<ReviewEntity> takeReviews(PageRequest pageRequest) {
         return reviewRepository.findAll(pageRequest);
     }
