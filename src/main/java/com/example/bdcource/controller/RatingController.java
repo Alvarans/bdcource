@@ -78,12 +78,6 @@ public class RatingController {
         if (response.getBody() == null)
             return 0;
         List<ReviewDto> reviews = List.of(response.getBody());
-        String url;
-        int rating = 0;
-        for (ReviewDto review : reviews) {
-            url = "http://localhost:8080/api/bdcource/rating/reviewrate?id=" + review.getReviewId();
-            rating += restTemplate.getForObject(url, Integer.class);
-        }
-        return (short) (rating / reviews.size());
+        return (short) ratingService.calculateReviewerRate(reviews);
     }
 }

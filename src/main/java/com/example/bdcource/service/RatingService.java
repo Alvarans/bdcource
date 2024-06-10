@@ -10,6 +10,7 @@ import com.example.bdcource.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -68,5 +69,16 @@ public class RatingService {
             rateSum+=reviewDto.getFilmRate();
         }
         return rateSum/ dtos.size();
+    }
+
+    public int calculateReviewerRate(List<ReviewDto> reviewDtos){
+        RestTemplate restTemplate = new RestTemplate();
+        String url;
+        int rating = 0;
+        for (ReviewDto review : reviewDtos) {
+            url = "http://localhost:8080/api/bdcource/rating/reviewrate?id=" + review.getReviewId();
+            rating += restTemplate.getForObject(url, Integer.class);
+        }
+        return (rating / reviewDtos.size());
     }
 }
