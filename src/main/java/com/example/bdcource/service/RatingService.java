@@ -37,7 +37,7 @@ public class RatingService {
     public int calculateFilmRate(FilmEntity film) {
         List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedFilm(film);
         if (ratings.isEmpty())
-            return 0;
+            return -1;
         int rateSum = 0;
         for (RatingEntity rate : ratings) {
             rateSum += rate.getRatingValue();
@@ -50,7 +50,7 @@ public class RatingService {
         try {
             List<RatingEntity> ratings = ratingRepository.findRatingEntitiesByRatedReview(review);
             if (ratings.isEmpty())
-                return 0;
+                return -1;
             int rateSum = 0;
             for (RatingEntity rate : ratings) {
                 rateSum += rate.getRatingValue();

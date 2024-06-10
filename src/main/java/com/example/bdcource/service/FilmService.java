@@ -13,8 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -60,5 +62,16 @@ public class FilmService {
         return filmRepository.findFilmEntitiesByGenres_GenreId(filmGenreId)
                 .stream().map(filmMapping::mapToFilmDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<FilmDto> takeFilmsByMultipleGenres(List<Integer> filmGenreIds){
+        List<FilmDto> films = new ArrayList<>();
+        for (int genreId : filmGenreIds){
+            List<FilmDto> temporarylist = filmRepository.findFilmEntitiesByGenres_GenreId(genreId)
+                    .stream().map(filmMapping::mapToFilmDto)
+                    .toList();
+            films.addAll(temporarylist);
+        }
+        return films;
     }
 }

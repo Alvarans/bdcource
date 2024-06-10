@@ -53,6 +53,11 @@ public class FilmController {
         return filmService.takeFilmsByGenre(filmGenreId);
     }
 
+    @GetMapping("/takefilmsbygenres")
+    public List<FilmDto> takeFilmsByMultipleGenres(@RequestBody List<Integer> filmGenres){
+        return filmService.takeFilmsByMultipleGenres(filmGenres);
+    }
+
     @GetMapping("/takefilmsbytitle")
     public List<FilmDto> takeFilmsByTitle(@RequestParam("title")String title){
         return filmService.takeFilmsByTitle(title);

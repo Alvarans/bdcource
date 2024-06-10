@@ -65,4 +65,25 @@ public class RatingController {
                 ? ratingService.calculateReviewRate(reviewMapping.mapToReviewEntity(reviewDto))
                 : 0;
     }
+
+    @GetMapping("/takereviewerrate")
+    public short takeReviewerRate(@RequestParam("id") Long userId) {
+        String uri = "http://localhost:8080/api/bdcource/user/takeuserbyid?id=" + userId;
+        RestTemplate restTemplate = new RestTemplate();
+        UserDto userDto = restTemplate.getForObject(uri, UserDto.class);
+        if (userDto == null)
+            return 0;
+        uri = "http://localhost:8080/api/bdcource/review/takereviewsforuser?userid=" + userId;
+        ResponseEntity<ReviewDto[]> response = restTemplate.getForEntity(uri,ReviewDto[].class);
+        if (response.getBody() == null)
+            return 0;
+        List<ReviewDto> reviews = List.of(response.getBody());
+        String url;
+        int rating = 0;
+        for (ReviewDto review : reviews) {
+            url = "http://localhost:8080/api/bdcource/rating/reviewrate?id=" + review.getReviewId();
+            rating += restTemplate.getForObject(url, Integer.class);
+        }
+        return (short) (rating / reviews.size());
+    }
 }

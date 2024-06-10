@@ -23,6 +23,11 @@ public class ReviewService {
     private ReviewMapping reviewMapping;
 
     public void addReview(ReviewDto reviewDto) {
+        if (reviewDto.getReviewText()==null)
+            throw new IllegalArgumentException("Your review text can't be empty");
+        if (reviewDto.getReviewTitle()==null)
+            throw new IllegalArgumentException("Your review title can't be empty");
+
         reviewRepository.save(reviewMapping.mapToReviewEntity(reviewDto));
     }
 
@@ -43,7 +48,11 @@ public class ReviewService {
         return reviewRepository.findAll(pageRequest);
     }
 
-    public List<ReviewEntity> takeAllReviewsForUser(UserEntity userEntity) {
-        return reviewRepository.findReviewEntitiesByUser(userEntity);
+//    public List<ReviewEntity> takeAllReviewsForUser(UserEntity userEntity) {
+//        return reviewRepository.findReviewEntitiesByUser(userEntity);
+//    }
+
+    public List<ReviewEntity> takeAllReviewsForUser(Long userId){
+        return reviewRepository.findReviewEntitiesByUserUserId(userId);
     }
 }
